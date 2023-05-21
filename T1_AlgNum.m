@@ -48,7 +48,7 @@ ylabel ("y");
 title(edostr, 'fontsize', fontsize);
 
 axis(ax);
-cols = {'r+-', 'go-', 'b*-', 'm--', 'cx-', 'ys-', 'bd-', 'b^-'};
+cols = {'m+-', 'go-', 'b*-', 'm--', 'cx-', 'gs-', 'bd-', 'r^-'};
 
 numPontos = n+1;
 numMetodos = 7;
