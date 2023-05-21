@@ -1,7 +1,8 @@
 pkg load symbolic;
 
 ## Q_1
-syms V(t) t0 V0 deltaQ
+syms V(t) t0 V0 Qin Qout
+deltaQ = Qin - Qout;
 edo = diff(V(t), t) == deltaQ;
 cond = V(t0) == V0;
 
@@ -19,9 +20,9 @@ Vmax_value = 5000;
 cond = V(0) == V0;
 
 # a)
-Qin = 300;    # Taxa de entrada
+Qin = 100;    # Taxa de entrada
 Qout = 200;   # Taxa de saída
-edo2 = diff(V(t), t) == Qin - Qout;
+
 
 sol = dsolve(edo2, cond);
 
@@ -29,7 +30,7 @@ fprintf('Caso a) Esvaziamento no instante: \n');
 t_esvaziamento = solve(subs(sol, Vmax, Vmax_value) == 0, t)
 
 # b)
-Qin = 100;    # Taxa de entrada
+Qin = 300;    # Taxa de entrada
 Qout = 200;   # Taxa de saída
 edo2 = diff(V(t), t) == Qin - Qout;
 
