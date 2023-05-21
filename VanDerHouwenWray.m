@@ -10,4 +10,4 @@ function [X,Y] = VanDerHouwenWray(f, x0, y0, h, n )
 
     [X,Y,~] = RungeKutta(f, x0, y0, h, n, butcher, s );
 
-end
+endfunction
