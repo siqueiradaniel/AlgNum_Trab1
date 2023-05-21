@@ -127,3 +127,10 @@ set (h, 'fontsize', fontsize, 'location', 'east');
 hold off;
 
 shg;
+
+
+
+### Questão 3
+
+## 3.1
+
