@@ -1,0 +1,1 @@
+# Simplificar plot de Aproximacao e pontos
