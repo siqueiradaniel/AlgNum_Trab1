@@ -103,7 +103,7 @@ printTabXY( X, 'X', Y, 'Y', '%.5d', 'Dormand Prince - Butcher Tableau' );
 #scatter(X, Y, markersize, cols{5}, 'filled');
 #leg{end+1} = sprintf('Dormand Prince - Butcher Tableau');
 plot (X, Y, cols{6});
-leg{end+1} = sprintf('Dormand Prince - Butcher Tableau');
+leg{end+1} = sprintf('DP - Butcher Tableau');
 
 # RungeKutta_Dormand_Prince_ode45
 [X, Y] = RungeKutta_Dormand_Prince_ode45(f, x0, y0, h, n, 1);
@@ -112,14 +112,14 @@ printTabXY( X, 'X', Y, 'Y', '%.5d', 'Dormand Prince Passo Fixo' );
 #scatter(X, Y, markersize, cols{6}, 'filled');
 #leg{end+1} = sprintf('DormandPrince Passo Fixo');
 plot (X, Y, cols{7});
-leg{end+1} = sprintf('DormandPrince Passo Fixo');
+leg{end+1} = sprintf('DP - Passo Fixo');
 
 # RungeKutta_Dormand_Prince Passo Adaptativo
 [X, Y] = RungeKutta_Dormand_Prince_ode45(f, x0, y0, h, n, 0);
 printTabXY( X, 'X', Y, 'Y', '%.5d', 'Dormand Prince Passo Adaptativo' );
 # Aproximacao e pontos
 plot (X, Y, cols{8});
-leg{end+1} = sprintf('DormandPrince Passo Adaptativo');
+leg{end+1} = sprintf('DP - Passo Adaptativo');
 
 # Apresenta legenda
 h = legend(leg);
