@@ -49,7 +49,7 @@ ylabel ("y");
 title(edostr, 'fontsize', fontsize);
 
 axis(ax);
-cols = {'r+-', 'go-', 'b*-', 'm--', 'cx-', 'ys-', 'bd-', 'b^-'};
+cols = {'m+-', 'go-', 'b*-', 'm--', 'cx-', 'gs-', 'bd-', 'r^-'};
 
 # Euler
 [X, Y] = Euler(f, x0, y0, h, n);
