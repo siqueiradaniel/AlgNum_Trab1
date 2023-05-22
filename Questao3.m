@@ -20,19 +20,19 @@ function Questao3()
   V0 = 2000;    # Volume inicial
 
   # a) Qin < Qout
-  Qin = 100;    # Taxa de entrada
-  Qout = 120;   # Taxa de saída
+  Qin = 45;    # Taxa de entrada
+  Qout = 50;   # Taxa de saída
   SolveLinearFunction(yx, Qin, Qout, V0, t, t0, Vmax);
 
   # b) Qin > Qout
-  Qin = 150;    # Taxa de entrada
-  Qout = 100;   # Taxa de saída
+  Qin = 50;    # Taxa de entrada
+  Qout = 45;   # Taxa de saída
   SolveLinearFunction(yx, Qin, Qout, V0, t, t0, Vmax);
 
 
   # c) Qin == Qout
-  Qin = 100;    # Taxa de entrada
-  Qout = 100;   # Taxa de saída
+  Qin = 50;    # Taxa de entrada
+  Qout = 50;   # Taxa de saída
   SolveLinearFunction(yx, Qin, Qout, V0, t, t0, Vmax);
 
   ### Questao 3.2

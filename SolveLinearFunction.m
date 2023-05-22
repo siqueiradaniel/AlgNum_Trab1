@@ -2,11 +2,11 @@ function SolveLinearFunction(yx, Qin, Qout, V0, t, t0, Vmax)
   strLeg = 'V(t)';
   
   if Qin < Qout
-      solve = fzero(@(t) yx(Qin, Qout, V0, t, t0), t0);
+      solve = fsolve(@(t) yx(Qin, Qout, V0, t, t0), t0);
       fprintf('Caso a) Qin == %.2f, Qout == %.2f\nEvento excepcional em tempo = %.2f\n', Qin, Qout, solve);
       Xsup = solve;
   else if Qin > Qout
-      solve = fzero(@(t) yx(Qin, Qout, V0-Vmax, t, t0), t0);
+      solve = fsolve(@(t) yx(Qin, Qout, V0-Vmax, t, t0), t0);
       fprintf('Caso b) Qin == %.2f, Qout == %.2f\nEvento excepcional em %.2f\n', Qin, Qout, solve);
       Xsup = solve;
   else
@@ -16,9 +16,9 @@ function SolveLinearFunction(yx, Qin, Qout, V0, t, t0, Vmax)
   endif
   endif
 
-  ax = [t0 Xsup 0 Vmax]
+  ax = [t0 Xsup+1 0 Vmax];
   
-  t = t0 : 1 : 1000;
+  t = t0 : 1 : 800;
   fun = @(t) 500;
   fontsize = 16;
   leg = {};
@@ -31,8 +31,12 @@ function SolveLinearFunction(yx, Qin, Qout, V0, t, t0, Vmax)
   plot(t, yx(0, 0, Vmax, t, 0), 'c--');
   
   leg{end+1} = sprintf('V0=%.2f L', V0);
-  leg{end+1} = sprintf(strLeg);
+  leg{end+1} = strLeg;
   leg{end+1} = sprintf('Vmax=5000.00 L', Vmax);
+  if Qin != Qout
+    line ('xdata',[Xsup,Xsup], 'ydata',[0,Vmax], 'linestyle', ':', 'color', 'r', "linewidth", 1.5);
+    leg{end+1} = 'Transbordagem do tanque';
+  endif
   
   # Apresenta legenda
   h = legend(leg);
