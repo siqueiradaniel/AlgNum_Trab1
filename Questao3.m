@@ -21,12 +21,12 @@ function Questao3()
 
   # a) Qin < Qout
   Qin = 100;    # Taxa de entrada
-  Qout = 200;   # Taxa de saída
+  Qout = 120;   # Taxa de saída
   SolveLinearFunction(yx, Qin, Qout, V0, t, t0, Vmax);
 
   # b) Qin > Qout
-  Qin = 300;    # Taxa de entrada
-  Qout = 200;   # Taxa de saída
+  Qin = 150;    # Taxa de entrada
+  Qout = 100;   # Taxa de saída
   SolveLinearFunction(yx, Qin, Qout, V0, t, t0, Vmax);
 
 
@@ -34,5 +34,4 @@ function Questao3()
   Qin = 100;    # Taxa de entrada
   Qout = 100;   # Taxa de saída
   SolveLinearFunction(yx, Qin, Qout, V0, t, t0, Vmax);
-
 
