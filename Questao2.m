@@ -12,11 +12,8 @@
 # Carregar bibliotéca simbólica
 pkg load symbolic;
 
-# Variável simbólica
-syms y(x);
-
 # Desabilita os Warnings
-# warning('off');
+warning('off');
 
 function [] = solveEDO(f, edostr, x0, y0, h, n, ode)
   syms y(x);
@@ -63,7 +60,7 @@ function [] = solveEDO(f, edostr, x0, y0, h, n, ode)
   #printTabXY( X, 'X', Y, 'Y', '%.5d', 'Euler' );
   eixoX = X';
   resultados(:,1) = Y';
-  erros(:,1) = (yx(X) - Y)';
+  erros(:,1) = abs(yx(X) - Y)';
   # Aproximacao e pontos
   plot (X, Y, cols{1});
   leg{end+1} = sprintf('Euler');
@@ -72,7 +69,7 @@ function [] = solveEDO(f, edostr, x0, y0, h, n, ode)
   [X, Y] = EulerMelhorado(f, x0, y0, h, n);
   #printTabXY( X, 'X', Y, 'Y', '%.5d', 'Euler Melhorado' );
   resultados(:,2) = Y';
-  erros(:,2) = (yx(X) - Y)';
+  erros(:,2) = abs(yx(X) - Y)';
   # Aproximacao e pontos
   plot (X, Y, cols{2});
   leg{end+1} = sprintf('Euler Melhorado');
@@ -81,7 +78,7 @@ function [] = solveEDO(f, edostr, x0, y0, h, n, ode)
   [X, Y] = EulerModificado(f, x0, y0, h, n);
   #printTabXY( X, 'X', Y, 'Y', '%.5d', 'Euler Modificado' );
   resultados(:,3) = Y';
-  erros(:,3) = (yx(X) - Y)';
+  erros(:,3) = abs(yx(X) - Y)';
   # Aproximacao e pontos
   plot (X, Y, cols{3});
   leg{end+1} = sprintf('Euler Modificado');
@@ -90,7 +87,7 @@ function [] = solveEDO(f, edostr, x0, y0, h, n, ode)
   [X, Y] = VanDerHouwenWray(f, x0, y0, h, n);
   #printTabXY( X, 'X', Y, 'Y', '%.5d', 'Van der Houwen’s/Wray' );
   resultados(:,4) = Y';
-  erros(:,4) = (yx(X) - Y)';
+  erros(:,4) = abs(yx(X) - Y)';
   # Aproximacao e pontos
   plot (X, Y, cols{4});
   leg{end+1} = sprintf('Van der Houwen');
@@ -99,7 +96,7 @@ function [] = solveEDO(f, edostr, x0, y0, h, n, ode)
   [X, Y] = RalstonFourthOrder(f, x0, y0, h, n);
   #printTabXY( X, 'X', Y, 'Y', '%.5d', 'Ralston''s Fourth-Order' );
   resultados(:,5) = Y';
-  erros(:,5) = (yx(X) - Y)';
+  erros(:,5) = abs(yx(X) - Y)';
   # Aproximacao e pontos
   plot (X, Y, cols{5});
   leg{end+1} = sprintf('Ralston');
@@ -108,7 +105,7 @@ function [] = solveEDO(f, edostr, x0, y0, h, n, ode)
   [X, Y, YLow] = RungeKutta_Dormand_Prince_MButcher(f, x0, y0, h, n);
   #printTabXY( X, 'X', Y, 'Y', '%.5d', 'Dormand Prince - Butcher Tableau' );
   resultados(:,6) = Y';
-  erros(:,6) = (yx(X) - Y)';
+  erros(:,6) = abs(yx(X) - Y)';
   # Aproximacao e pontos
   plot (X, Y, cols{6});
   leg{end+1} = sprintf('DP - Butcher Tableau');
@@ -117,7 +114,7 @@ function [] = solveEDO(f, edostr, x0, y0, h, n, ode)
   [X, Y] = RungeKutta_Dormand_Prince_ode45(f, x0, y0, h, n, 1);
   #printTabXY( X, 'X', Y, 'Y', '%.5d', 'Dormand Prince Passo Fixo' );
   resultados(:,7) = Y';
-  erros(:,7) = (yx(X) - Y)';
+  erros(:,7) = abs(yx(X) - Y)';
   # Aproximacao e pontos
   plot (X, Y, cols{7});
   leg{end+1} = sprintf('DP - Passo Fixo');
@@ -144,6 +141,15 @@ function [] = solveEDO(f, edostr, x0, y0, h, n, ode)
   lw = 1.5;
   fontsize = 16;
   leg = {};
+
+  for i=1:numMetodos
+    axisX = eixoX;
+    axisY = erros(:,i);
+    semilogy(axisX, axisY, cols{i});
+  endfor
+
+  semilogy(adaptX, abs(yx(adaptX) - adaptY), cols{8});
+
   leg{end+1} = sprintf('Euler');
   leg{end+1} = sprintf('Euler Melhorado');
   leg{end+1} = sprintf('Euler Modificado');
@@ -152,14 +158,6 @@ function [] = solveEDO(f, edostr, x0, y0, h, n, ode)
   leg{end+1} = sprintf('DP - Butcher Tableau');
   leg{end+1} = sprintf('DP - Passo Fixo');
   leg{end+1} = sprintf('DP - Passo Adaptativo');
-
-  for i=1:numMetodos
-    axisX = eixoX;
-    axisY = erros(:,i);
-    semilogy(axisX, axisY, cols{i});
-  endfor
-
-  semilogy(adaptX, adaptY, cols{8});
 
   h = legend(leg);
   set (h, 'fontsize', fontsize, 'location', 'east');
@@ -180,33 +178,46 @@ function [] = solveEDO(f, edostr, x0, y0, h, n, ode)
 endfunction
 
 
-fprintf("##### Letra A #####\n");
-f = @(x,y) 1.0 / exp(x) - 2.0*y;
-edostr = 'PVI: dy/dx = 1/e^x - 2y, y(0)=1 --- Solução: y(x) = exp(-x)';
-x0 = 0; y0 = 1; h = 0.5; n = 5;
-ode = exp(x) * diff(y, x) + 2*exp(x) * y == 1;
-solveEDO(f, edostr, x0, y0, h, n, ode);
+function [] = Questao2()
+  syms y(x);
+
+  ##fprintf("##### Solucao da Especificacao\n");
+  ##f = @(x,y) (sin(x)/(x*x)-3*y)/x;
+  ##edostr = 'Solucao da Especificacao';
+  ##x0 = pi; y0 = 1; h = 1; n = 5;
+  ##ode = diff(y, x) == (sin(x)/(x*x)-3*y)/x;
+  ##solveEDO(f, edostr, x0, y0, h, n, ode);
 
 
-fprintf("##### Letra B #####\n");
-f = @(x,y) sin(x)/x^3 - 3*y/x;
-edostr = 'PVI: dy/dx = sin(x)/x^3 - 3y/x, y(pi)=1 --- Solução: (-cos (x) - 1 + pi^3) / x^3';
-x0 = pi; y0 = 1; h = 1.0; n = 5;
-ode = x*diff(y, x)+3*y == sin(x)/x^2;
-solveEDO(f, edostr, x0, y0, h, n, ode);
+  fprintf("##### Letra A\n");
+  f = @(x,y) 1.0 / exp(x) - 2.0*y;
+  edostr = 'PVI: dy/dx = 1/e^x - 2y, y(0)=1 --- Solução: y(x) = exp(-x)';
+  x0 = 0; y0 = 1; h = 0.5; n = 5;
+  ode = exp(x) * diff(y, x) + 2*exp(x) * y == 1;
+  solveEDO(f, edostr, x0, y0, h, n, ode);
 
 
-fprintf("##### Letra C #####\n");
-f = @(x,y) cos(x)^2-tan(x)*y;
-edostr = 'PVI: dy/dx = cos(x)^2-tan(x)y, y(pi/8)=1 --- Solução: (sin(x)- 3*sqrt(2)*sqrt(sqrt(2)+2)/2+5*sqrt(sqrt(2)+2)/2)*cos(x)';
-x0 = pi/8; y0 = 1; h = pi/16; n = 5;
-ode = diff(y, x)+tan(x)*y == cos(x)^2;
-solveEDO(f, edostr, x0, y0, h, n, ode);
+  fprintf("##### Letra B\n");
+  f = @(x,y) sin(x)/x^3 - 3*y/x;
+  edostr = 'PVI: dy/dx = sin(x)/x^3 - 3y/x, y(pi)=1 --- Solução: (-cos (x) - 1 + pi^3) / x^3';
+  x0 = pi; y0 = 1; h = 1.0; n = 5;
+  ode = x*diff(y, x)+3*y == sin(x)/x^2;
+  solveEDO(f, edostr, x0, y0, h, n, ode);
 
 
-fprintf("##### Letra D #####\n");
-f = @(x,y) (1 - 1/x - 2*y)/x;
-edostr = 'PVI: dy/dx = (1 - 1/x - 2*y)/x, y(1)=1 --- Solução: (x^2/2-x+3/2)/x^2';
-x0 = 1; y0 = 1; h = 0.1; n = 5;
-ode = x*diff(y, x) + 2*y == 1-1/x;
-solveEDO(f, edostr, x0, y0, h, n, ode);
+  fprintf("##### Letra C\n");
+  f = @(x,y) cos(x)^2-tan(x)*y;
+  edostr = 'PVI: dy/dx = cos(x)^2-tan(x)y, y(pi/8)=1 --- Solução: (sin(x)- 3*sqrt(2)*sqrt(sqrt(2)+2)/2+5*sqrt(sqrt(2)+2)/2)*cos(x)';
+  x0 = pi/8; y0 = 1; h = pi/16; n = 5;
+  ode = diff(y, x)+tan(x)*y == cos(x)^2;
+  solveEDO(f, edostr, x0, y0, h, n, ode);
+
+
+  fprintf("##### Letra D\n");
+  f = @(x,y) (1 - 1/x - 2*y)/x;
+  edostr = 'PVI: dy/dx = (1 - 1/x - 2*y)/x, y(1)=1 --- Solução: (x^2/2-x+3/2)/x^2';
+  x0 = 1; y0 = 1; h = 0.1; n = 5;
+  ode = x*diff(y, x) + 2*y == 1-1/x;
+  solveEDO(f, edostr, x0, y0, h, n, ode);
+
+endfunction
