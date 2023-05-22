@@ -12,3 +12,11 @@ function SolveLinearFunction(yx, Qin, Qout, V0, t, t0, Vmax)
   endif
   endif
 
+  fun2 = @(t) yx(Qin, Qout, V0, t, t0)
+
+  t = t0 : 1 : 10;
+
+  figure;
+  hold on;
+
+  plot(t, yx(Qin, Qout, V0, t, t0))
