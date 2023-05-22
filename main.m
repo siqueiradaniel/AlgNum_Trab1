@@ -1,3 +1,12 @@
+# Trabalho 1
+# Algoritmos Númericos
+# Equações Diferenciais Ordinárias
+#
+# Alunos:
+# Daniel Siqueira
+# Gustavo Brunoro
+# Lucas Gabriel
+
 pkg load symbolic;
 close all;
 

@@ -1,13 +1,4 @@
-# Trabalho 1
-# Algoritmos Númericos
-#
-# Questão 1
-# Equações Diferenciais Ordinárias
-#
-# Alunos:
-# Daniel Siqueira
-# Gustavo Brunoro
-# Lucas Gabriel
+### Questao 2
 
 # Carregar bibliotéca simbólica
 pkg load symbolic;
