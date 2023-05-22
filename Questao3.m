@@ -35,4 +35,28 @@ function Questao3()
   Qout = 100;   # Taxa de saída
   SolveLinearFunction(yx, Qin, Qout, V0, t, t0, Vmax);
 
-
+  ### Questao 3.2
+  
+  #Q1
+  
+  syms c(t) Qin cin V(t) m(t)
+  
+  ode = diff(c, t) == Qin*(cin-c)/V;
+  
+  solC = dsolve(ode);
+  disp('Solução Analítica: i(t): EDO='); solC
+  
+  #Q2
+  
+  m(t) = diff(m, t) == Qin*(cin-c);
+  solM = dsolve(m);
+  
+  #Q3
+  
+  fprintf('\nVersao numerica de c(t):\n');
+  yx = matlabFunction(solC)
+  
+  fprintf('\nVersao numerica de m(t):\n');
+  yx = matlabFunction(solM)
+  
+  
