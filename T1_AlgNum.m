@@ -176,6 +176,18 @@ function [] = solveEDO(f, edostr, x0, y0, h, n, ode)
   end
   fprintf('\n\n')
 
+#Gerando a Tabela
+fprintf('%10s | %10s | %10s | %10s | %10s | %10s | %10s | %10s | %10s\n', 'x', 'V. Exato', 'Euler', 'Euler Mel', 'Euler Mod', 'VdHouven/W', 'Ralston', 'DormPrinc', 'ODE45 Fixo');
+fprintf('---------------------------------------------------------------------------------------------------------------------\n');
+for i=1:numPontos
+  fprintf('%10.5f | %10.5f | %10.5f | %10.5f | %10.5f | %10.5f | %10.5f | %10.5f | %10.5f\n', eixoX'(i), yx(eixoX)'(i), resultados(i, 1), resultados(i, 2), resultados(i, 3), resultados(i, 4), resultados(i, 5), resultados(i, 6), resultados(i, 7));
+end
+fprintf('    Erros\n');
+for i=1:numPontos
+  fprintf('%10.5f | %10.5f | %10.5f | %10.5f | %10.5f | %10.5f | %10.5f | %10.5f | %10.5f\n', eixoX'(i), 0, erros(i, 1), erros(i, 2), erros(i, 3), erros(i, 4), erros(i, 5), erros(i, 6), erros(i, 7)');
+end
+fprintf('\n\n')
+
 endfunction
 
 
