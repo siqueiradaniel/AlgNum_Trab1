@@ -1,6 +1,8 @@
 function Questao3()
   pkg load symbolic;
-
+  
+  ### Questao 3.1
+  
   ## Q_1
   syms V(t) t0 V0 Qin Qout
   deltaQ = Qin - Qout;

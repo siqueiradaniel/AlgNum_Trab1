@@ -5,9 +5,9 @@
 # Equações Diferenciais Ordinárias
 #
 # Alunos:
+# Daniel Siqueira
 # Gustavo Brunoro
 # Lucas Gabriel
-# Daniel Siqueira
 
 # Carregar bibliotéca simbólica
 pkg load symbolic;
