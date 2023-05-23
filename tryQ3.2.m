@@ -1,7 +1,8 @@
 #pkg install -forge symbolic;
 pkg load symbolic;
   
-## V(t)
+### Q_1
+## Determinar a função V(t)
 syms V(t) t0 V0 Qin Qout
 deltaQ = Qin - Qout;
 edo = diff(V(t), t) == deltaQ;
@@ -13,14 +14,41 @@ sol = dsolve(edo, cond)
 fprintf('\nVersao numerica da solucao:\n');
 yx = matlabFunction(sol)
 
-## C(t)
-syms c(t) c0 Cin
+## Determinar a funcao c(t):
+syms c(t) Qin cin c0 V(t) m(t)
+  
+ode = diff(c, t) == Qin*(cin-c)/sol;
+cond = c(0) == c0;
 
-edo2 = diff(c(t), t) == Qin(Cin-c(t));
-cond2 = c(t0) = c0;
+solC = dsolve(ode, cond);
+disp('Solução Analítica: i(t): EDO='); solC
 
-fprintf('Solucao:\n');
-sol = dsolve(edo2, cond2)
+### Q_2 - Montar m(t) = c(t)*V(t)
+syms m(t)
 
-fprintf('\nVersao numerica da solucao:\n');
-yx = matlabFunction(sol)
+m(t) = sol*solC
+
+### Q_3 - Converter c(t) e m(t) em numeric function
+fun_c = matlabFunction(solC)
+fun_m = matlabFunction(m(t))
+
+### Q_4
+Vmax = 5000;
+t0 = 0;
+V0 = 2000;
+c0 = 0.05;
+cin = 2;
+
+# a) Qin < Qout
+Qin = 40;    # Taxa de entrada
+Qout = 45;   # Taxa de saída
+
+t = t0 : 1 : 800;
+
+figure;
+hold on;
+
+plot(t, fun_c(Qin, Qout, V0, c0, cin, t, t0), 'r-');
+plot(t, fun_m(Qin, Qout, V0, c0, cin, t, t0), 'b-');
+
+
