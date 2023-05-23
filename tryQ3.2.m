@@ -43,12 +43,16 @@ cin = 2;
 Qin = 40;    # Taxa de entrada
 Qout = 45;   # Taxa de saída
 
-t = t0 : 1 : 800;
+Plot_Questao_3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0);
 
-figure;
-hold on;
+# Qin == Qout
+Qin = 40;    # Taxa de entrada
+Qout = 40;   # Taxa de saída
 
-plot(t, fun_c(Qin, Qout, V0, c0, cin, t, t0), 'r-');
-plot(t, fun_m(Qin, Qout, V0, c0, cin, t, t0), 'b-');
+Plot_Questao_3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0);
 
+# a) Qin > Qout
+Qin = 45;    # Taxa de entrada
+Qout = 45;   # Taxa de saída
 
+Plot_Questao_3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0);
