@@ -33,10 +33,14 @@ function SolveLinearFunction(yx, Qin, Qout, V0, t, t0, Vmax)
   leg{end+1} = sprintf('V0=%.2f L', V0);
   leg{end+1} = strLeg;
   leg{end+1} = sprintf('Vmax=5000.00 L', Vmax);
-  if Qin != Qout
+  if Qin > Qout
     line ('xdata',[Xsup,Xsup], 'ydata',[0,Vmax], 'linestyle', ':', 'color', 'r', "linewidth", 1.5);
     leg{end+1} = 'Transbordagem do tanque';
-  endif
+  else if Qin < Qout
+    line ('xdata',[Xsup,Xsup], 'ydata',[0,Vmax], 'linestyle', ':', 'color', 'r', "linewidth", 1.5);
+    leg{end+1} = 'Vazamento completo do tanque';  
+  end
+  end
   
   # Apresenta legenda
   h = legend(leg);
