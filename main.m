@@ -7,6 +7,7 @@
 # Gustavo Brunoro
 # Lucas Gabriel
 
+#pkg install -forge symbolic;
 pkg load symbolic;
 close all;
 

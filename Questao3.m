@@ -1,19 +1,17 @@
 function Questao3()
-  pkg load symbolic;
-  
   ### Questao 3.1
-  fprintf('Questão 3.1:\n');
+  fprintf('\n### Questão 3.1 ###\n');
   ## Q_1
-  syms V(t) t0 V0 Qin Qout
+  syms V(t) t0 V0 Qin Qout;
   deltaQ = Qin - Qout;
   edo = diff(V(t), t) == deltaQ;
   cond = V(t0) == V0;
 
-  fprintf('Solucao:\n');
+  fprintf('Solucao Analítica de V(t):\n');
   sol = dsolve(edo, cond)
 
   ## Q_2
-  fprintf('\nVersao numerica da solucao:\n');
+  fprintf('\nVersao numerica da solucao de V(t):\n');
   yx = matlabFunction(sol)
 
   ## Q_3
@@ -38,7 +36,7 @@ function Questao3()
   SolveLinearFunction(yx, Qin, Qout, V0, t, t0, Vmax);
 
   ### Questao 3.2
-  fprintf('Questão 3.2:\n');
+  fprintf('\n### Questão 3.2 ###\n');
     
   ### Q_1
   ## Determinar a função V(t)
@@ -54,7 +52,7 @@ function Questao3()
   syms c(t) Qin cin c0 V(t) m(t)
   ode = diff(c, t) == Qin*(cin-c)/sol;
   cond = c(0) == c0;
-  fprintf("c(t) analiticamente:\n");
+  fprintf('Solucao Analítica de c(t):\n');
   solC = dsolve(ode, cond)
   
   ### Q_2 - Montar m(t) = c(t)*V(t)
@@ -77,22 +75,23 @@ function Questao3()
   c0 = 0.05;
   cin = 2;
   
-  # a) Qin < Qout
+  # a) Qin = 40; Qout = 45
   Qin = 40;    # Taxa de entrada
   Qout = 45;   # Taxa de saída
   
   Plot_Questao3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0, Vmax);
+  fprintf('\nCaso a) Qin == %.2f, Qout == %.2f\nEvento excepcional m(t) == 0 em t == 400.00\n', Qin, Qout);
   
-  # Qin == Qout
+  # b) Qin = 40; Qout = 40
   Qin = 40;    # Taxa de entrada
   Qout = 40;   # Taxa de saída
   
   Plot_Questao3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0, Vmax);
+  fprintf('\nCaso b) Qin == %.2f, Qout == %.2f\nConstancia de volume: V(t) = %.2f\nConstancia de concentracao: c(t) = %.2f\nm(t) == 0 em 400.00\n', Qin, Qout, V0, c0);
   
-  # a) Qin > Qout
+  # c) Qin = 45; Qout = 45
   Qin = 45;    # Taxa de entrada
   Qout = 45;   # Taxa de saída
   
   Plot_Questao3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0, Vmax);
-  
-  
+  fprintf('\nCaso c) Qin == %.2f, Qout == %.2f\nConstancia de volume: V(t) = %.2f\nConstancia de concentracao: c(t) = %.2f\nm(t) == 0 em 400.00\n', Qin, Qout, V0, c0);
