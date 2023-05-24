@@ -32,12 +32,12 @@ function Plot_Questao3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0, Vmax)
   leg = {};
   
   plot(t, fun_c(Qin, Qout, V0, c0, cin, t, t0), 'b-');
-  line ('xdata',[0,500], 'ydata',[c0,c0], 'linestyle', ':', 'color', 'r', "linewidth", 1.5);
-  line ('xdata',[0,500], 'ydata',[2,2], 'linestyle', ':', 'color', 'b', "linewidth", 1.5);
+  line ('xdata',[0,500], 'ydata',[c0,c0], 'linestyle', '--', 'color', 'r', "linewidth", 1.5);
+  line ('xdata',[0,500], 'ydata',[2,2], 'linestyle', '--', 'color', 'b', "linewidth", 1.5);
   
   leg{end+1} = 'c(t)';
   leg{end+1} = sprintf('c0=%.2f kg/L', c0);
-  leg{end+1} = sprintf('Vmax=%.2f kg/L', cin);
+  leg{end+1} = sprintf('cin=%.2f kg/L', cin);
   set (legend(leg), 'fontsize', fontsize, 'location', 'east');
   hold off;
   shg;
