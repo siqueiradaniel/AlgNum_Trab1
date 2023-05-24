@@ -1,16 +1,16 @@
 function Plot_Questao3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0, Vmax)
   t = t0 : 1 : 800;
   
-  if Qin == Qout
-    # Mudar para c0 e 0 em vez de t
-    fun_c = @(Qin, Qout, V0, c0, cin, t, t0) t;
-    fun_m = @(Qin, Qout, V0, c0, cin, t, t0) t;
-  endif
   figure;
   hold all;
   leg = {};
   fontsize = 16;
   
+  if Qin == Qout
+    line ('xdata',[0,500], 'ydata',[c0*V0,c0*V0], 'linestyle', '-', 'color', 'b', "linewidth", 1.5);
+  else 
+    plot(t, fun_m(Qin, Qout, V0, c0, cin, t, t0), 'b-');
+  endif
   plot(t, fun_m(Qin, Qout, V0, c0, cin, t, t0), 'b-');
   line ('xdata',[0,500], 'ydata',[2000,2000], 'linestyle', '--', 'color', 'r', "linewidth", 1.5);
   line ('xdata',[0,500], 'ydata',[5000,5000], 'linestyle', '--', 'color', 'b', "linewidth", 1.5);
@@ -31,7 +31,12 @@ function Plot_Questao3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0, Vmax)
   figure;
   leg = {};
   
-  plot(t, fun_c(Qin, Qout, V0, c0, cin, t, t0), 'b-');
+  if Qin == Qout
+    line ('xdata',[0,500], 'ydata',[c0,c0], 'linestyle', '-', 'color', 'b', "linewidth", 1.5);
+  else 
+    plot(t, fun_c(Qin, Qout, V0, c0, cin, t, t0), 'b-');
+  endif
+  
   line ('xdata',[0,500], 'ydata',[c0,c0], 'linestyle', '--', 'color', 'r', "linewidth", 1.5);
   line ('xdata',[0,500], 'ydata',[2,2], 'linestyle', '--', 'color', 'b', "linewidth", 1.5);
   

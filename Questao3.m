@@ -89,12 +89,12 @@ function Questao3()
   Qin = 40;    # Taxa de entrada
   Qout = 40;   # Taxa de saída
   
-  #Plot_Questao_3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0);
+  Plot_Questao3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0, Vmax);
   
   # a) Qin > Qout
   Qin = 45;    # Taxa de entrada
   Qout = 45;   # Taxa de saída
   
-  #Plot_Questao_3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0);
+  Plot_Questao3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0, Vmax);
   
   
