@@ -19,7 +19,7 @@ function SolveLinearFunction(yx, Qin, Qout, V0, t, t0, Vmax)
   ax = [t0 Xsup+1 0 Vmax];
   
   t = t0 : 1 : 800;
-  fun = @(t) 500;
+  
   fontsize = 16;
   leg = {};
 
