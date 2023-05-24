@@ -9,7 +9,6 @@
 
 #pkg install -forge symbolic;
 pkg load symbolic;
-close all;
 
 fprintf("##### Questão 2 #####\n");
 Questao2()

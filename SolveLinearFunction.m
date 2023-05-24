@@ -10,7 +10,7 @@ function SolveLinearFunction(yx, Qin, Qout, V0, t, t0, Vmax)
       fprintf('\nCaso b) Qin == %.2f, Qout == %.2f\nEvento excepcional em %.2f\n', Qin, Qout, solve);
       Xsup = solve;
   else
-      fprintf('\nCaso c) Qin == %.2f, Qout == %.2f\nConstancia de volume: Qin = Qout\n\n', Qin, Qout);
+      fprintf('\nCaso c) Qin == %.2f, Qout == %.2f\nConstancia de volume: V(t) == V(0) == %.2f\n\n', Qin, Qout, V0);
       Xsup = 500;
       strLeg = sprintf('V(t)=V0=%.2f L', V0);
   endif

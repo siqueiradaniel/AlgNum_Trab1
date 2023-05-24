@@ -80,18 +80,18 @@ function Questao3()
   Qout = 45;   # Taxa de saída
   
   Plot_Questao3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0, Vmax);
-  fprintf('\nCaso a) Qin == %.2f, Qout == %.2f\nEvento excepcional m(t) == 0 em t == 400.00\n', Qin, Qout);
+  fprintf('\nCaso a) Qin == %.2f, Qout == %.2f\nEvento excepcional m(t) == V(t) == 0 em t == 400.00\n', Qin, Qout);
   
   # b) Qin = 40; Qout = 40
   Qin = 40;    # Taxa de entrada
   Qout = 40;   # Taxa de saída
   
   Plot_Questao3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0, Vmax);
-  fprintf('\nCaso b) Qin == %.2f, Qout == %.2f\nConstancia de volume: V(t) = %.2f\nConstancia de concentracao: c(t) = %.2f\nm(t) == 0 em 400.00\n', Qin, Qout, V0, c0);
+  fprintf('\nCaso b) Qin == %.2f, Qout == %.2f\nConstancia de volume: V(t) = %.2f\nConstancia de concentracao: c(t) = %.2f\nConstancia de matéria: m(t) == %.2f\n', Qin, Qout, V0, c0, V0*c0);
   
   # c) Qin = 45; Qout = 45
   Qin = 45;    # Taxa de entrada
   Qout = 45;   # Taxa de saída
   
   Plot_Questao3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0, Vmax);
-  fprintf('\nCaso c) Qin == %.2f, Qout == %.2f\nConstancia de volume: V(t) = %.2f\nConstancia de concentracao: c(t) = %.2f\nm(t) == 0 em 400.00\n', Qin, Qout, V0, c0);
+  fprintf('\nCaso c) Qin == %.2f, Qout == %.2f\nConstancia de volume: V(t) = %.2f\nConstancia de concentracao: c(t) = %.2f\nConstancia de matéria: m(t) == %.2f\n', Qin, Qout, V0, c0, V0*c0);

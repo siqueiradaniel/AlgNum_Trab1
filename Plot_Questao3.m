@@ -11,11 +11,16 @@ function Plot_Questao3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0, Vmax)
   else 
     plot(t, fun_m(Qin, Qout, V0, c0, cin, t, t0), 'b-');
   endif
-  plot(t, fun_m(Qin, Qout, V0, c0, cin, t, t0), 'b-');
-  line ('xdata',[0,500], 'ydata',[2000,2000], 'linestyle', '--', 'color', 'r', "linewidth", 1.5);
-  line ('xdata',[0,500], 'ydata',[5000,5000], 'linestyle', '--', 'color', 'b', "linewidth", 1.5);
-  line ('xdata',[0,400], 'ydata',[V0,0], 'linestyle', '-', 'color', 'c', "linewidth", 1.5);
-  line ('xdata',[400,400], 'ydata',[0,Vmax], 'linestyle', ':', 'color', 'r', "linewidth", 1.5);
+  line ('xdata',[0,500], 'ydata',[V0,V0], 'linestyle', '--', 'color', 'r', "linewidth", 1.5);
+  if Qin == Qout
+    line ('xdata',[0,400], 'ydata',[V0,V0], 'linestyle', '-', 'color', 'c', "linewidth", 1.5);
+  else 
+    line ('xdata',[0,400], 'ydata',[V0,0], 'linestyle', '-', 'color', 'c', "linewidth", 1.5);
+  endif
+  line ('xdata',[0,500], 'ydata',[Vmax,Vmax], 'linestyle', '--', 'color', 'b', "linewidth", 1.5);
+  if Qin != Qout
+    line ('xdata',[400,400], 'ydata',[0,Vmax], 'linestyle', ':', 'color', 'r', "linewidth", 1.5);
+  endif
   
   leg{end+1} = 'm(t)';
   leg{end+1} = sprintf('V0=%.2f L', V0);
