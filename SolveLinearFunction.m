@@ -24,11 +24,11 @@ function SolveLinearFunction(yx, Qin, Qout, V0, t, t0, Vmax)
   leg = {};
 
   figure;
-  hold on;
+  hold all;
 
-  plot(t, yx(0, 0, V0, t, 0), 'b--');
   plot(t, yx(Qin, Qout, V0, t, t0), 'r-');
-  plot(t, yx(0, 0, Vmax, t, 0), 'c--');
+  line ('xdata',[0,Xsup], 'ydata',[V0,V0], 'linestyle', '--', 'color', 'b', "linewidth", 1.5);
+  line ('xdata',[0,Xsup], 'ydata',[Vmax,Vmax], 'linestyle', '--', 'color', 'c', "linewidth", 1.5);
   
   leg{end+1} = sprintf('V0=%.2f L', V0);
   leg{end+1} = strLeg;
