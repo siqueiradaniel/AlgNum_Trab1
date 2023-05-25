@@ -1,19 +1,24 @@
-function Plot_Questao3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0, Vmax)
-  t = t0 : 1 : 800;
-  
+function Plot_Questao3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0, Vmax, sol, yx)
   figure;
   hold all;
   leg = {};
   fontsize = 16;
   
   if Qin == Qout
-    line ('xdata',[0,500], 'ydata',[c0*V0,c0*V0], 'linestyle', '-', 'color', 'b', "linewidth", 1.5);
+    syms c(t)
+    ode = diff(c, t) == Qin*(cin-c)/V0;
+    solC = dsolve(ode, c(t0) == c0);
+    fun_c = matlabFunction(solC);
+    fun_m = matlabFunction(sol*solC);
+    t = t0 : 1 : 800;
+    plot(t, fun_m(Qin, Qout, V0, t, t0), 'b-');
   else 
+    t = t0 : 1 : 800;
     plot(t, fun_m(Qin, Qout, V0, c0, cin, t, t0), 'b-');
   endif
-  line ('xdata',[0,500], 'ydata',[V0,V0], 'linestyle', '--', 'color', 'r', "linewidth", 1.5);
+  line ('xdata',[0,400], 'ydata',[V0,V0], 'linestyle', '--', 'color', 'r', "linewidth", 1.5);
   if Qin == Qout
-    line ('xdata',[0,400], 'ydata',[V0,V0], 'linestyle', '-', 'color', 'c', "linewidth", 1.5);
+    plot(t, yx(0, 0, V0, t, 0), 'c-');
   else 
     line ('xdata',[0,400], 'ydata',[V0,0], 'linestyle', '-', 'color', 'c', "linewidth", 1.5);
   endif
@@ -26,7 +31,9 @@ function Plot_Questao3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0, Vmax)
   leg{end+1} = sprintf('V0=%.2f L', V0);
   leg{end+1} = 'V(t)';
   leg{end+1} = sprintf('Vmax=%.2f L', Vmax);
-  leg{end+1} = 'Vazamento completo do tanque';  
+  if Qin != Qout
+    leg{end+1} = 'Vazamento completo do tanque';  
+  endif
  
   set (legend(leg), 'fontsize', fontsize, 'location', 'east');
   hold off;
@@ -37,7 +44,7 @@ function Plot_Questao3(fun_c, fun_m, Qin, Qout, V0, c0, cin, t, t0, Vmax)
   leg = {};
   
   if Qin == Qout
-    line ('xdata',[0,500], 'ydata',[c0,c0], 'linestyle', '-', 'color', 'b', "linewidth", 1.5);
+    plot(t, fun_c(t), 'b-');
   else 
     plot(t, fun_c(Qin, Qout, V0, c0, cin, t, t0), 'b-');
   endif
